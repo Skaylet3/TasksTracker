@@ -1,11 +1,27 @@
 import { Module } from '@nestjs/common';
-import { TasksModule } from './modules/tasks/tasks.module';
 import { MongooseModule } from '@nestjs/mongoose';
-
-const uri = "mongodb+srv://Vercel-Admin-atlas-lime-flower:Fx6QxJzkiBnnWwHV@atlas-lime-flower.nk4ejuz.mongodb.net/?retryWrites=true&w=majority"
+import { ConfigModule } from '@nestjs/config';
+import { TasksModule } from './modules/tasks/tasks.module';
+import { validateEnv } from './config/env';
 
 @Module({
-  imports: [TasksModule, MongooseModule.forRoot(uri)],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+      validate: validateEnv,
+    }),
+    MongooseModule.forRootAsync({
+      useFactory: () => {
+        const uri = process.env.MONGODB_URI;
+        if (!uri) {
+          throw new Error('MONGODB_URI is not set');
+        }
+        return { uri };
+      },
+    }),
+    TasksModule,
+  ],
   controllers: [],
   providers: [],
 })

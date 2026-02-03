@@ -61,7 +61,7 @@ describe('TasksController', () => {
     const task = { _id: 'task-1', title: 'Task 1' };
     tasksService.findOne.mockResolvedValue(task);
 
-    const result = await controller.findOne({ id: 'task-1' });
+    const result = await controller.findOne('task-1');
 
     expect(tasksService.findOne).toHaveBeenCalledWith('task-1');
     expect(result).toBe(task);

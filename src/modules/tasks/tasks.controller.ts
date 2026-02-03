@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { GetTaskParamDto } from './dto/get-task-param.dto'
 
 @Controller('tasks')
 export class TasksController {
@@ -20,17 +19,17 @@ export class TasksController {
   }
 
   @Get(':id')
-  findOne(@Param() { id }: GetTaskParamDto) {
+  findOne(@Param('id') id: string) {
     return this.tasksService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param() id: string, @Body() updateTaskDto: UpdateTaskDto) {
+  update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
     return this.tasksService.update(id, updateTaskDto);
   }
 
   @Delete(':id')
-  remove(@Param() id: string) {
+  remove(@Param('id') id: string) {
     return this.tasksService.remove(id);
   }
 }
