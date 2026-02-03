@@ -1,0 +1,3 @@
+# Auth
+
+cookie-based

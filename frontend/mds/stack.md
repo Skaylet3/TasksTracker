@@ -1,0 +1,14 @@
+## ⚙️ Tech Stack
+- **Vite**
+- **React**
+- **TypeScript**
+- **ESM**
+- **Axios**
+- **CSS & Tailwind**
+- **ESLint + Prettier**
+- **Zustand**
+- **TanStack query**
+- **Zod**
+- **React-Hook-form**
+- **ShadCN**
+- **Tailwind**
